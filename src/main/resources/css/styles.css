@@ -1,0 +1,41 @@
+.white-background{
+    -fx-background-color: #fff;
+}
+
+.transparent{
+    -fx-background-color: rgba(0,0,0,0);
+}
+
+.round-layout{
+    -fx-border-radius: 50;
+    -fx-border-color: #D7D7D7;
+}
+
+
+.border-menu{
+    -fx-background-color: linear-gradient(to bottom, #176B87, #053B50);
+}
+
+.border-top{
+    -fx-background-color: linear-gradient(to bottom, #176B87, #053B50);
+}
+/**********************CSS PARA BOTONES LATERALES**********************/
+.sidebar-button {
+    -fx-background-color: transparent;
+    -fx-text-fill: white;
+    -fx-font-size: 18px;
+    -fx-padding: 10px 20px;
+}
+/***/
+/* styles.css */
+
+/* Clase de estilo para el botón de editar */
+.button-edit {
+    -fx-background-color: #4CAF50; /* Fondo de color verde */
+}
+
+/* Clase de estilo para el botón de eliminar */
+.button-delete {
+    -fx-background-color: #f44336; /* Fondo de color rojo */
+}
+
