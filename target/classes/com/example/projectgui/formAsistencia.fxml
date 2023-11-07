@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="291.0" prefWidth="523.0" stylesheets="@../../../css/Buttons.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.projectgui.Controller.AsistenciaController">
+   <children>
+      <Button fx:id="btnMarcarAsistenciaEntrada" layoutX="176.0" layoutY="71.0" mnemonicParsing="false" text="HORA DE ENTRADA" />
+      <Button fx:id="btnMarcarAsistenciaSalida" layoutX="175.0" layoutY="203.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="155.0" text="HORA DE SALIDA" />
+   </children>
+</AnchorPane>

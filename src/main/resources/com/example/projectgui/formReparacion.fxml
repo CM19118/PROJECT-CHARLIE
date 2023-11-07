@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" stylesheets="@../../../css/Buttons.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1">
+    <children>
+        <Text layoutX="182.0" layoutY="36.0" strokeType="OUTSIDE" strokeWidth="0.0" text="AGRAGAR REPARACIONES">
+            <font>
+                <Font size="20.0" />
+            </font>
+        </Text>
+        <Text layoutX="47.0" layoutY="73.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Servicio " />
+        <ComboBox fx:id="comboReparacionServicio" layoutX="184.0" layoutY="55.0" prefWidth="150.0" />
+        <Text layoutX="47.0" layoutY="104.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Fecha Reparacion" />
+        <DatePicker fx:id="calendarioReparacionFecha" layoutX="184.0" layoutY="86.0" />
+        <Text layoutX="47.0" layoutY="134.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nombre Cliente" />
+        <Text layoutX="373.0" layoutY="66.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Precio Unitario" />
+        <TextField fx:id="campoReparacionCliente" layoutX="185.0" layoutY="117.0" prefHeight="27.0" prefWidth="267.0" />
+        <Text layoutX="47.0" layoutY="170.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Telefono" />
+        <Text layoutX="46.0" layoutY="214.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Correo" />
+        <Text layoutX="45.0" layoutY="252.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Equipo" />
+        <Text layoutX="42.0" layoutY="299.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Detalles" />
+        <TextField fx:id="campoReparacionTelefono" layoutX="185.0" layoutY="153.0" prefHeight="18.0" prefWidth="207.0" />
+        <TextField fx:id="campoReparacionCorreo" layoutX="182.0" layoutY="197.0" prefHeight="26.0" prefWidth="288.0" />
+        <TextField fx:id="campoRaparacionEquipo" layoutX="182.0" layoutY="235.0" prefHeight="27.0" prefWidth="288.0" />
+        <TextField fx:id="campoReparacionDetalle" layoutX="182.0" layoutY="282.0" prefHeight="18.0" prefWidth="297.0" />
+        <Button fx:id="btnReparacionGuardar" layoutX="153.0" layoutY="335.0" mnemonicParsing="false" text="Guardar" />
+        <Button fx:id="btnReparacionCancelar" layoutX="338.0" layoutY="338.0" mnemonicParsing="false" text="Cancelar" />
+        <TextField fx:id="campoReparacionPrecioUnit" layoutX="479.0" layoutY="42.0" prefHeight="27.0" prefWidth="113.0" />
+    </children>
+</AnchorPane>

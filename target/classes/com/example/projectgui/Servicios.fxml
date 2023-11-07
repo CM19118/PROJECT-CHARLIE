@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.URL?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.paint.RadialGradient?>
+<?import javafx.scene.paint.Stop?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="552.0" prefWidth="1323.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.projectgui.Controller.ServiciosController">
+   <children>
+      <TableView fx:id="tablaServicio" layoutX="11.0" layoutY="124.0" prefHeight="267.0" prefWidth="1312.0">
+        <columns>
+            <TableColumn fx:id="colIdServicio" prefWidth="381.9999723434448" text="ID Servicio" />
+            <TableColumn fx:id="colNombreServicio" prefWidth="600.0000076293945" text="Servicio " />
+            <TableColumn fx:id="colAcciones" prefWidth="328.8887939453125" text="Acción" />
+        </columns>
+      </TableView>
+      <Button fx:id="btnAgregarUnNuevoServicio" layoutX="1104.0" layoutY="57.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="176.0" text="Registrar Servicio">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Button>
+      <Text layoutX="584.0" layoutY="65.0" strokeType="OUTSIDE" strokeWidth="0.0" text="SERVICIOS">
+         <font>
+            <Font name="Bell MT Bold" size="33.0" />
+         </font>
+         <fill>
+            <RadialGradient centerX="0.5184501985782187" centerY="0.5" focusDistance="0.015267117332866231" radius="0.5916030534351145">
+               <stops>
+                  <Stop>
+                     <color>
+                        <Color red="0.027450980618596077" green="0.09019608050584793" blue="0.1882352977991104" />
+                     </color>
+                  </Stop>
+                  <Stop offset="1.0">
+                     <color>
+                        <Color red="0.16470588743686676" green="0.5843137502670288" blue="0.7098039388656616" />
+                     </color>
+                  </Stop>
+               </stops>
+            </RadialGradient>
+         </fill>
+      </Text>
+   </children>
+   <stylesheets>
+      <URL value="@../../../css/Buttons.css" />
+      <URL value="@../../../css/tableView.css" />
+   </stylesheets>
+</AnchorPane>

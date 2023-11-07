@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.paint.RadialGradient?>
+<?import javafx.scene.paint.Stop?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="450.0" prefWidth="650.0" style="-fx-border-color: #000;" stylesheets="@../../../css/Buttons.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.projectgui.Controller.UsuarioController">
+   <children>
+      <VBox layoutY="80.0" prefHeight="370.0" prefWidth="650.0" spacing="10.0">
+         <children>
+            <HBox alignment="CENTER" prefHeight="57.0" prefWidth="650.0" spacing="73.0">
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="USUARIO">
+                     <font>
+                        <Font name="System Bold" size="15.0" />
+                     </font>
+                  </Text>
+                  <TextField fx:id="fieldUsuario" prefHeight="35.0" prefWidth="368.0" promptText="Sixnine32" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="57.0" prefWidth="650.0" spacing="40.0">
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="CONTRASENA">
+                     <font>
+                        <Font name="System Bold" size="15.0" />
+                     </font>
+                  </Text>
+                  <TextField fx:id="fieldPassword" prefHeight="35.0" prefWidth="368.0" promptText="*********" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" layoutX="10.0" layoutY="177.0" prefHeight="57.0" prefWidth="650.0" spacing="108.0">
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="ROL">
+                     <font>
+                        <Font name="System Bold" size="15.0" />
+                     </font>
+                  </Text>
+                  <ComboBox fx:id="listRoles" prefHeight="37.0" prefWidth="365.0" promptText="Seleccione rol..." />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" layoutX="10.0" layoutY="245.0" prefHeight="57.0" prefWidth="650.0" spacing="52.0">
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="EMPLEADO">
+                     <font>
+                        <Font name="System Bold" size="15.0" />
+                     </font>
+                  </Text>
+                  <ComboBox fx:id="listEmpleados" prefHeight="37.0" prefWidth="365.0" promptText="Seleccione empleado..." />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="57.0" prefWidth="650.0" spacing="83.0">
+               <children>
+                  <Button fx:id="btnAceptarUsuario" mnemonicParsing="false" onAction="#onAceptarButtonClick" text="ACEPTAR" textFill="WHITE">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="btnCancelarUsuario" mnemonicParsing="false" onAction="#onCancelarButtonClick" text="CANCELAR" textFill="WHITE">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Button>
+               </children>
+            </HBox>
+         </children>
+         <padding>
+            <Insets top="20.0" />
+         </padding>
+      </VBox>
+      <Text fx:id="txtTituloProducto" layoutX="161.0" layoutY="64.0" strokeType="OUTSIDE" strokeWidth="0.0" text="AGREGAR USUARIO">
+         <font>
+            <Font name="Bell MT Bold" size="33.0" />
+         </font>
+         <fill>
+            <RadialGradient centerX="0.5184501985782187" centerY="0.5" focusDistance="0.015267117332866231" radius="0.5916030534351145">
+               <stops>
+                  <Stop>
+                     <color>
+                        <Color red="0.027450980618596077" green="0.09019608050584793" blue="0.1882352977991104" />
+                     </color>
+                  </Stop>
+                  <Stop offset="1.0">
+                     <color>
+                        <Color red="0.16470588743686676" green="0.5843137502670288" blue="0.7098039388656616" />
+                     </color>
+                  </Stop>
+               </stops>
+            </RadialGradient>
+         </fill>
+      </Text>
+   </children>
+</AnchorPane>

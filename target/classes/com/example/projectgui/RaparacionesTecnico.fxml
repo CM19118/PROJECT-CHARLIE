@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="382.0" prefWidth="1422.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.projectgui.Controller.ReparacionesTecnicoController">
+   <children>
+      <Text layoutX="46.0" layoutY="49.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Vista De Las Rparaciones Del Tecnico">
+         <font>
+            <Font size="32.0" />
+         </font>
+      </Text>
+       <TableView fx:id="tablaReparacionesTecnico" layoutX="7.0" layoutY="71.0" prefHeight="293.0" prefWidth="1380.0">
+           <columns>
+               <TableColumn fx:id="colIdReparacionTec" prefWidth="27.0" text="ID" />
+               <TableColumn fx:id="colServicioTec" prefWidth="56.666664123535156" text="Servicio" />
+               <TableColumn fx:id="colPrecioUnitarioTec" prefWidth="90.0" text="Precio" />
+               <TableColumn fx:id="colFechaInicioTec" prefWidth="94.0" text="Fecha de Inicio" />
+               <TableColumn fx:id="colClienteTec" prefWidth="171.0" text="Cliente" />
+               <TableColumn fx:id="colTelefonoTec" prefWidth="82.0" text="Telefono" />
+               <TableColumn fx:id="colCorreoTec" prefWidth="75.0" text="Correo" />
+               <TableColumn fx:id="colEquipoTec" prefWidth="128.0" text="Equipo" />
+               <TableColumn fx:id="colDetallesTec" prefWidth="111.0" text="Detalles" />
+               <TableColumn fx:id="colEstadoTec" prefWidth="115.0" text="Estado" />
+               <TableColumn fx:id="colDetallesCostosAdicionalesTec" prefWidth="127.0" text="Costos Adicionales" />
+               <TableColumn fx:id="colMontoCostosAdicionalesTec" minWidth="0.0" prefWidth="70.6666259765625" text="Monto Costos Adicionales" />
+               <TableColumn fx:id="colAcciones1Tec" prefWidth="123.0" text="Accion" />
+               <TableColumn fx:id="coloAcciones2Tec" prefWidth="101.0" text="Accion" />
+           </columns>
+       </TableView>
+   </children>
+</AnchorPane>

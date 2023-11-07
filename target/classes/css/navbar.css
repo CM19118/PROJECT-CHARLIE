@@ -1,0 +1,4 @@
+.button-active {
+    -fx-background-color: #0084A7; /* Cambia este color al color que deseas para el botón activo */
+    -fx-text-fill: white; /* Cambia este color al color del texto del botón activo */
+}
