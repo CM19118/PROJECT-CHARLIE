@@ -26,7 +26,7 @@ public class ComprasController implements Initializable {
     private ResultSet resultado; //Para el resultado de la base de datos
     /////////////////////////////////////////////////////////
     @FXML
-    public TableView<Garantia> tablaCompras;
+    public TableView<Compras> tablaCompras;
     @FXML
     public TableColumn<Garantia, Integer> columnIdCompra;
     @FXML
@@ -50,6 +50,8 @@ public class ComprasController implements Initializable {
         columnCantidad.setCellValueFactory(new PropertyValueFactory<>("cantidad"));
         columnMontoAPagar.setCellValueFactory(new PropertyValueFactory<>("montoCompra"));
         columnFechaCompra.setCellValueFactory(new PropertyValueFactory<>("fechaCompra"));
+
+        cargarRegistroDeGarantias();
     }
     @FXML
     public void BotonManejoCompra(){
@@ -69,28 +71,25 @@ public class ComprasController implements Initializable {
         String consultaGarantias = "SELECT * FROM tbl_ventas;";
 
         try {
-            listaGarantias.clear();
+            listaCompras.clear();
             estado = conexion.createStatement();
             resultado = estado.executeQuery(consultaGarantias);
 
             while (resultado.next())
             {
-                int idGarantia = resultado.getInt("idFactura");
-                String fechaInicioGarantia = resultado.getString("fechaFactura");
-                String clienteGarantia = resultado.getString("cliente");
-                String equipoGarantia = resultado.getString("equipo");
-                String detalleEquipoGaratia = resultado.getString("detalles");
-                double montoGarantia = resultado.getDouble("monto");
-                String fechaVencimientoGarantia = resultado.getString("fechaVencimiento");
-                String estadoGarantia = resultado.getString("estadoGarantia");
+                int idCompra = resultado.getInt("id");
+                String nombreArticulo = resultado.getString("nombreArticulo");
+                int cantidad = resultado.getInt("cantidad");
+                double montoCompra = resultado.getDouble("montoCompra");
+                String fechaCompra = resultado.getString("fechaCompra");
 
-                Garantia garantia = new Garantia(idGarantia,fechaInicioGarantia,clienteGarantia,equipoGarantia,detalleEquipoGaratia,montoGarantia,fechaVencimientoGarantia,estadoGarantia);
-                listaGarantias.add(garantia);
+                Compras compra = new Compras(idCompra,nombreArticulo,cantidad,montoCompra,fechaCompra);
+                listaCompras.add(compra);
 
             }
 
-            ObservableList<Garantia> listaObservableGarantia = FXCollections.observableArrayList(listaGarantias);
-            tablaGarantias.setItems(listaObservableGarantia);
+            ObservableList<Compras> listaObservableCompras = FXCollections.observableArrayList(listaCompras);
+            tablaCompras.setItems(listaObservableCompras);
 
         }catch (SQLException e)
         {
