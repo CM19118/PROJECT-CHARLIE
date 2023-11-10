@@ -28,18 +28,13 @@ public class Main implements Initializable {
     @FXML
     private Text textoMain;
     @FXML
-    private Button btnCarrito, btnFacturas, btnInventario, btnProductos, btnVentas, btnProveedores, btnReparaciones, btnGarantias, btnReparacionesTecnico, btnCompras;
+    private Button btnCarrito, btnFacturas, btnInventario, btnProductos, btnVentas, btnProveedores, btnReparaciones, btnGarantias, btnReparacionesTecnico;
     @FXML
     private MenuItem opcCrearEmpleado, opcCrearUsuarios, opcAsistencia, opcGestionarServicios;
     @FXML
     private StackPane centerPane;
     @FXML
     private SplitMenuButton splitMenuBtn;
-    //INSTANCIAS PARA LA BASE DE DATOS
-    private Connection connect;
-    private Statement statement;
-    private PreparedStatement prepare;
-    private ResultSet result;
     private Map<Button, String> buttonViewMap = new HashMap<>();
     private Button activeButton = null;
 
@@ -57,7 +52,7 @@ public class Main implements Initializable {
         buttonViewMap.put(btnReparaciones, "Reparaciones.fxml");
         buttonViewMap.put(btnGarantias, "Garantias.fxml");
         buttonViewMap.put(btnReparacionesTecnico, "RaparacionesTecnico.fxml");
-        buttonViewMap.put(btnCompras,"Compras.fxml");
+        //buttonViewMap.put(btnCompras,"Compras.fxml");
 
         // Obtenemos la instancia de UserSession desde SesionManager
         UserSession userSession = SessionManager.getUsuarioSesion();
@@ -136,7 +131,7 @@ public class Main implements Initializable {
             btnFacturas.setVisible(false);
             btnGarantias.setVisible(false);
             btnReparaciones.setVisible(false);
-            btnCompras.setVisible(false);
+            //btnCompras.setVisible(false);
         }
     }
 
@@ -187,7 +182,16 @@ public class Main implements Initializable {
     {
         loadView("VistaAsistencias.fxml");
     }
+    @FXML
     public void openVistaServicios() {
         loadView("Servicios.fxml");
+    }
+    @FXML
+    public void openVistaCompras() {
+        loadView("Compras.fxml");
+    }
+    @FXML
+    public void openVistaContabilidad() {
+        loadView("contabilidad.fxml");
     }
 }

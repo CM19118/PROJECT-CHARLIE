@@ -50,6 +50,8 @@
                         <MenuItem fx:id="opcCrearUsuarios" mnemonicParsing="false" onAction="#openFormUsuarios" text="CREAR USUARIOS" />
                         <MenuItem fx:id="opcAsistencia" mnemonicParsing="false" onAction="#openVistasAsistencia" text="ADMINISTRAR ASISTENCIAS" />
                         <MenuItem fx:id="opcGestionarServicios" mnemonicParsing="false" onAction="#openVistaServicios" text="ADMINISTRAR SERVICIOS" />
+                        <MenuItem mnemonicParsing="false" onAction="#openVistaCompras" text="COMPRAS" />
+                        <MenuItem mnemonicParsing="false" onAction="#openVistaContabilidad" text="ADMINISTRAR CONTABILIDAD" />
 
                      </items>
                      <graphic>
@@ -135,11 +137,6 @@
                      </font>
                   </Button>
                   <Button fx:id="btnReparacionesTecnico" layoutX="10.0" layoutY="434.0" mnemonicParsing="false" onAction="#handleClick" prefHeight="85.0" prefWidth="254.0" styleClass="sidebar-button" text="REPARACION TEC.">
-                     <font>
-                        <Font name="Berlin Sans FB" size="17.0" />
-                     </font>
-                  </Button>
-                  <Button fx:id="btnCompras" mnemonicParsing="false" onAction="#handleClick" prefHeight="85.0" prefWidth="254.0" styleClass="sidebar-button" text="COMPRAS">
                      <font>
                         <Font name="Berlin Sans FB" size="17.0" />
                      </font>
