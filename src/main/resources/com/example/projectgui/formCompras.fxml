@@ -65,7 +65,7 @@
                         <Font name="System Bold" size="15.0" />
                      </font>
                   </Text>
-                  <DatePicker fx:id="fieldFecha" prefHeight="37.0" prefWidth="367.0" />
+                  <DatePicker fx:id="fechaData" prefHeight="37.0" prefWidth="367.0" />
                </children>
             </HBox>
             <HBox alignment="CENTER" prefHeight="57.0" prefWidth="650.0" spacing="83.0">

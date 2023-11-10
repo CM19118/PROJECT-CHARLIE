@@ -11,15 +11,15 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="952.0" prefWidth="1461.0" style="-fx-background-color: #F5F5F1;" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.projectgui.Controller.FacturaController">
+<AnchorPane prefHeight="952.0" prefWidth="1461.0" style="-fx-background-color: #F5F5F1;" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.projectgui.Controller.ComprasController">
    <children>
       <TableView fx:id="tablaCompras" layoutX="54.0" layoutY="269.0" prefHeight="412.0" prefWidth="1356.0">
          <columns>
             <TableColumn fx:id="columnIdCompra" prefWidth="129.55558013916016" text="ID " />
-            <TableColumn fx:id="columnNombreArticulo" prefWidth="450.22222900390625" text="Nombre del articulo" />
-            <TableColumn fx:id="columnCantidad" prefWidth="129.55558013916016" text="ID " />
-            <TableColumn fx:id="columnMontoAPagar" prefWidth="567.111083984375" text="Monto a pagar por compra" />
-            <TableColumn fx:id="columnFechaCompra" maxWidth="205.555419921875" minWidth="-Infinity" prefWidth="191.333251953125" text="Fecha" />
+            <TableColumn fx:id="columnNombreArticulo" prefWidth="495.3333435058594" text="Nombre del articulo" />
+            <TableColumn fx:id="columnCantidad" prefWidth="281.33331298828125" text="Cantidad" />
+            <TableColumn fx:id="columnMontoAPagar" prefWidth="247.99993896484375" text="Monto a pagar por compra" />
+            <TableColumn fx:id="columnFechaCompra" maxWidth="267.333251953125" minWidth="-Infinity" prefWidth="189.3333740234375" text="Fecha" />
          </columns>
       </TableView>
       <Text layoutX="542.0" layoutY="112.0" strokeType="OUTSIDE" strokeWidth="0.0" text="PANEL DE COMPRAS">
@@ -43,7 +43,7 @@
             </RadialGradient>
          </fill>
       </Text>
-      <Button fx:id="btnAggCompra" layoutX="172.0" layoutY="736.0" mnemonicParsing="false" prefHeight="65.0" prefWidth="217.0" text="AGREGAR COMPRA">
+      <Button fx:id="btnAggCompra" layoutX="172.0" layoutY="736.0" mnemonicParsing="false" onAction="#aggCompra" prefHeight="65.0" prefWidth="217.0" text="AGREGAR COMPRA">
          <font>
             <Font size="16.0" />
          </font>

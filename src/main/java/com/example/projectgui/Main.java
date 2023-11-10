@@ -28,7 +28,7 @@ public class Main implements Initializable {
     @FXML
     private Text textoMain;
     @FXML
-    private Button btnCarrito, btnFacturas, btnInventario, btnProductos, btnVentas, btnProveedores, btnReparaciones, btnGarantias, btnReparacionesTecnico;
+    private Button btnCarrito, btnFacturas, btnInventario, btnProductos, btnVentas, btnProveedores, btnReparaciones, btnGarantias, btnReparacionesTecnico, btnCompras;
     @FXML
     private MenuItem opcCrearEmpleado, opcCrearUsuarios, opcAsistencia, opcGestionarServicios;
     @FXML
@@ -48,8 +48,6 @@ public class Main implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-
-
         buttonViewMap.put(btnProductos, "Producto.fxml");
         buttonViewMap.put(btnInventario, "Inventario.fxml");
         buttonViewMap.put(btnCarrito, "Carrito.fxml");
@@ -59,6 +57,7 @@ public class Main implements Initializable {
         buttonViewMap.put(btnReparaciones, "Reparaciones.fxml");
         buttonViewMap.put(btnGarantias, "Garantias.fxml");
         buttonViewMap.put(btnReparacionesTecnico, "RaparacionesTecnico.fxml");
+        buttonViewMap.put(btnCompras,"Compras.fxml");
 
         // Obtenemos la instancia de UserSession desde SesionManager
         UserSession userSession = SessionManager.getUsuarioSesion();
@@ -108,8 +107,6 @@ public class Main implements Initializable {
         }
     }
 
-
-
     private void manejodeVistas(int rol){
         if(rol == 0){
             loadView("Producto.fxml");
@@ -139,6 +136,7 @@ public class Main implements Initializable {
             btnFacturas.setVisible(false);
             btnGarantias.setVisible(false);
             btnReparaciones.setVisible(false);
+            btnCompras.setVisible(false);
         }
     }
 
