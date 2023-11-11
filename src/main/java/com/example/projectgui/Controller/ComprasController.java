@@ -104,6 +104,7 @@ public class ComprasController implements Initializable{
             columnFechaCompra.setCellValueFactory(new PropertyValueFactory<>("fechaCompra"));
 
             tablaCompras.setItems(mostrarCompras);
+            tablaCompras.refresh();
         }
     }
     @FXML
@@ -121,6 +122,13 @@ public class ComprasController implements Initializable{
                 preparedStatement.setDouble(3, Double.parseDouble(fieldMonto.getText()));
                 preparedStatement.setString(4, fechaData.getValue().toString());
                 preparedStatement.execute();
+
+                // Actualizar la cantidad de productos en la tabla tbl_productos
+                query = "UPDATE `tbl_productos` SET `cantidad` = `cantidad` + ? WHERE `nombreProducto` = ?";
+                PreparedStatement updateStatement = conexion.prepareStatement(query);
+                updateStatement.setInt(1, Integer.parseInt(fieldCantidad.getText()));
+                updateStatement.setString(2, listNombreArticulos.getValue().toString());
+                updateStatement.executeUpdate();
 
                 MostrasrlistaCompras();
 
@@ -140,6 +148,7 @@ public class ComprasController implements Initializable{
             throw new RuntimeException(e);
         }
     }
+
     public void cargandoProveedoresCombox() throws SQLException {
         // Obteniendo la conexión a la base de datos aquí
         conexion = DatabaseConnection.getConnection();

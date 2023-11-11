@@ -35,7 +35,7 @@
                   <Font size="45.0" />
                </font>
             </Text>
-            <Text fx:id="textoMain" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Prueba" wrappingWidth="224.36593627929688">
+            <Text fx:id="textoMain" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="." wrappingWidth="224.36593627929688">
                <font>
                   <Font name="Edwardian Script ITC" size="42.0" />
                </font>
