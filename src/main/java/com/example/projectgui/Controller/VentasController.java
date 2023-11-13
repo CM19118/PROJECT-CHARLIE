@@ -11,12 +11,10 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.text.Text;
 
 import java.io.FileOutputStream;
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -40,6 +38,12 @@ public class VentasController{
     public Button btnFiltrarPorFecha;
     @FXML
     public Button btnFiltrarPorRango;
+    @FXML
+    public Button btnGuardarTotalVentas;
+
+    //Para el total de las ventas
+    @FXML
+    public Text txtTotalVentas;
 
 
 
@@ -62,6 +66,9 @@ public class VentasController{
     @FXML
     public TableColumn<Venta, Double> columnTotalProdcuto;
 
+    //varible para almacenar el total de las ventas
+    double sumaDeVentas = 0.0;
+
 
     public void initialize()
     {
@@ -81,10 +88,44 @@ public class VentasController{
 
         //Para filtrar por rango de fecha
         btnFiltrarPorRango.setOnAction(actionEvent -> filtrarPorRango());
+
+        //Para guradar el total de ventas
+        btnGuardarTotalVentas.setOnAction(event -> guardarTotalVentas());
+    }
+
+    private void guardarTotalVentas() {
+
+        conexion = DatabaseConnection.getConnection();
+        PreparedStatement preparedStatement;
+        try {
+            // Consulta SQL de inserción
+            String query = "INSERT INTO tbl_efectivoventas (totalEfectivo) VALUES (?)";
+            preparedStatement = conexion.prepareStatement(query);
+            preparedStatement.setDouble(1, sumaDeVentas);
+
+            int filasAfectadas = preparedStatement.executeUpdate();
+            if (filasAfectadas > 0)
+            {
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Informacion");
+                alert.setHeaderText("Se guardó con exito !!");
+                alert.showAndWait();
+            }
+            else {
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Informacion");
+                alert.setContentText("No se guardó !!");
+                alert.showAndWait();
+            }
+
+        }catch (SQLException e)
+        {
+            e.printStackTrace();
+        }
+
     }
 
     private void cargarRegistroDeVentas() {
-
         List<Venta> listaDeVentas = new ArrayList<>();
 
         conexion = DatabaseConnection.getConnection();
@@ -103,6 +144,8 @@ public class VentasController{
                 int cantidadProductos = resultado.getInt("cantidadProducto");
                 double total = resultado.getDouble("total");
 
+                sumaDeVentas = sumaDeVentas + total;
+
                 Venta venta = new Venta(idVenta,fechaVenta,productos,cantidadProductos,total);
                 listaDeVentas.add(venta);
             }
@@ -111,6 +154,8 @@ public class VentasController{
         {
             e.printStackTrace();
         }
+
+        txtTotalVentas.setText(String.valueOf(sumaDeVentas));
 
         ObservableList<Venta> listaDeVentasObservable = FXCollections.observableArrayList(listaDeVentas);
         tablaVentas.setItems(listaDeVentasObservable);

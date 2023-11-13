@@ -48,6 +48,21 @@
             <Font size="16.0" />
          </font>
       </Button>
+      <Button fx:id="btnGuardarTotalCompra" layoutX="874.0" layoutY="741.0" mnemonicParsing="false" text="Costo de compra (Guardar)">
+         <font>
+            <Font size="21.0" />
+         </font>
+      </Button>
+      <Text layoutX="1093.0" layoutY="774.0" strokeType="OUTSIDE" strokeWidth="0.0" text="\$">
+         <font>
+            <Font size="21.0" />
+         </font>
+      </Text>
+      <Text fx:id="mostrarTotalCompras" layoutX="1129.0" layoutY="773.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0">
+         <font>
+            <Font size="21.0" />
+         </font>
+      </Text>
    </children>
    <stylesheets>
       <URL value="@../../../css/tableView.css" />

@@ -36,11 +36,12 @@
       </Text>
       <TableView fx:id="tablaInventario" layoutX="76.0" layoutY="254.0" prefHeight="405.0" prefWidth="1324.0">
          <columns>
-            <TableColumn fx:id="colIdProducto" prefWidth="84.0" text="idProducto" />
-            <TableColumn fx:id="colNombreProducto" prefWidth="312.0" text="Nombre Producto" />
-            <TableColumn fx:id="colCantidad" prefWidth="74.0" text="Cantidad" />
-            <TableColumn fx:id="colPrecio" prefWidth="75.0" text="Precio" />
-            <TableColumn fx:id="colProveedor" prefWidth="75.0" text="Proveedor" />
+            <TableColumn fx:id="colIdProducto" prefWidth="112.0" text="idProducto" />
+            <TableColumn fx:id="colNombreProducto" prefWidth="478.0" text="Nombre Producto" />
+            <TableColumn fx:id="colCantidad" prefWidth="185.0" text="Cantidad" />
+            <TableColumn fx:id="colPrecioCosto" prefWidth="152.0" text="Costo " />
+            <TableColumn fx:id="colTotalCosto" prefWidth="238.0" text="Total Costo" />
+            <TableColumn fx:id="colProveedor" prefWidth="204.0" text="Proveedor" />
          </columns>
          <columnResizePolicy>
             <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
@@ -48,6 +49,17 @@
       </TableView>
       <Button fx:id="btnImprimirInventario" layoutX="158.0" layoutY="810.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="202.0" text="Imprimir Inventario" />
       <Button fx:id="btnInventarioSinExistencia" layoutX="159.0" layoutY="741.0" mnemonicParsing="false" text="Ver inventario sin exitencia" />
+      <Text layoutX="1090.0" layoutY="770.0" strokeType="OUTSIDE" strokeWidth="0.0" text="\$">
+         <font>
+            <Font size="21.0" />
+         </font>
+      </Text>
+      <Text fx:id="txtTotalInventario" layoutX="1104.0" layoutY="771.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0">
+         <font>
+            <Font size="21.0" />
+         </font>
+      </Text>
+      <Button fx:id="btnGuardarTotalInventario" layoutX="883.0" layoutY="741.0" mnemonicParsing="false" text="Total Inventario (Guardar)" />
    </children>
    <stylesheets>
       <URL value="@../../../css/tableView.css" />

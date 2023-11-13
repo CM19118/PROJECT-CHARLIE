@@ -1,17 +1,20 @@
 package com.example.projectgui.Models;
 
 public class Inventario {
+
     public int idProducto;
     public String nombreProducto;
     public int cantidad;
-    public double precio;
+    public double precioCosto;
+    public double totalCosto;
     public String proveedor;
 
-    public Inventario(int idProducto, String nombreProducto, int cantidad, double precio, String proveedor) {
+    public Inventario(int idProducto, String nombreProducto, int cantidad, double precioCosto, double totalCosto, String proveedor) {
         this.idProducto = idProducto;
         this.nombreProducto = nombreProducto;
         this.cantidad = cantidad;
-        this.precio = precio;
+        this.precioCosto = precioCosto;
+        this.totalCosto = totalCosto;
         this.proveedor = proveedor;
     }
 
@@ -39,12 +42,20 @@ public class Inventario {
         this.cantidad = cantidad;
     }
 
-    public double getPrecio() {
-        return precio;
+    public double getPrecioCosto() {
+        return precioCosto;
     }
 
-    public void setPrecio(double precio) {
-        this.precio = precio;
+    public void setPrecioCosto(double precioCosto) {
+        this.precioCosto = precioCosto;
+    }
+
+    public double getTotalCosto() {
+        return totalCosto;
+    }
+
+    public void setTotalCosto(double totalCosto) {
+        this.totalCosto = totalCosto;
     }
 
     public String getProveedor() {

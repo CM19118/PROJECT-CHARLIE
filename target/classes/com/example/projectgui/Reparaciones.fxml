@@ -81,6 +81,18 @@
             </RadialGradient>
          </fill>
       </Text>
+      <Text layoutX="1098.0" layoutY="813.0" strokeType="OUTSIDE" strokeWidth="0.0" text="\$">
+         <font>
+            <Font size="21.0" />
+         </font>
+      </Text>
+      <Text fx:id="txtTotalReparacionesPendientes" layoutX="1123.0" layoutY="814.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0">
+         <font>
+            <Font size="21.0" />
+         </font>
+      </Text>
+      <Button fx:id="btnGuarTotalReparacionePendientes" layoutX="845.0" layoutY="784.0" mnemonicParsing="false" text="Reparaciones Pendientes (Guardar)" />
+
    </children>
    <stylesheets>
       <URL value="@../../../css/Buttons.css" />

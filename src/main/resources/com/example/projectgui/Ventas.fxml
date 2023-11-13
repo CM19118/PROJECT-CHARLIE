@@ -102,6 +102,18 @@
       <DatePicker fx:id="fecha2" layoutX="297.0" layoutY="716.0" prefHeight="43.0" prefWidth="175.0" />
       <Label layoutX="112.0" layoutY="699.0" text="Fecha 1" />
       <Label layoutX="304.0" layoutY="698.0" text="Fecha 2" />
+      <Text layoutX="1204.0" layoutY="767.0" strokeType="OUTSIDE" strokeWidth="0.0" text="\$">
+         <font>
+            <Font size="21.0" />
+         </font>
+      </Text>
+      <Text fx:id="txtTotalVentas" layoutX="1223.0" layoutY="767.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0">
+         <font>
+            <Font size="21.0" />
+         </font>
+      </Text>
+      <Button fx:id="btnGuardarTotalVentas" layoutX="1005.0" layoutY="741.0" mnemonicParsing="false" text="Total de Ventas (Guardar)" />
+
    </children>
    <stylesheets>
       <URL value="@../../../css/Buttons.css" />

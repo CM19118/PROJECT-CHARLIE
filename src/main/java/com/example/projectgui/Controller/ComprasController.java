@@ -17,12 +17,16 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.Callback;
 
 import java.net.URL;
 import java.sql.*;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -61,11 +65,57 @@ public class ComprasController implements Initializable{
     @FXML public DatePicker fechaData;
     private Stage stage;
 
+    //---------------- Variable para almacenar la suma de las compras que serian las cuentas por pagar-----------
+    double sumaCompras = 0.0;
+
+    //-------------- se configura el bton y el texto para que aprezca el total
+    @FXML
+    private Button btnGuardarTotalCompra;
+    @FXML
+    private Text mostrarTotalCompras;
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         stage = new Stage();
         setStage(stage);
         MostrasrlistaCompras();
+
+        //Se agrega el boton para agregar el dato a la base de datos
+        if (btnGuardarTotalCompra != null) {
+            btnGuardarTotalCompra.setOnAction(event -> guardarTotalCompra());
+        }
+    }
+
+    private void guardarTotalCompra() {
+
+        conexion = DatabaseConnection.getConnection();
+        PreparedStatement preparedStatement;
+        try {
+            // Consulta SQL de inserción
+            String query = "INSERT INTO tbl_totalcompras (totalCompras) VALUES (?)";
+            preparedStatement = conexion.prepareStatement(query);
+            preparedStatement.setDouble(1, sumaCompras);
+
+            int filasAfectadas = preparedStatement.executeUpdate();
+
+            if (filasAfectadas > 0){
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Informacion");
+                alert.setHeaderText("Se guardó con exito !!");
+                alert.showAndWait();
+            }
+            else {
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Informacion");
+                alert.setContentText("No se guardó !!");
+                alert.showAndWait();
+            }
+
+        }catch (SQLException e)
+        {
+            e.printStackTrace();
+        }
+
     }
 
     public ObservableList<Compras> listaCompras() {
@@ -84,6 +134,8 @@ public class ComprasController implements Initializable{
                 double montoCompra = resultado.getDouble("montoCompra");
                 String fechaCompra = resultado.getString("fechaCompra");
 
+                sumaCompras = sumaCompras+montoCompra;
+
                 compras = new Compras(id,nombreArticulo,cantidad,montoCompra,fechaCompra);
                 dataList.addAll(compras);
             }
@@ -91,6 +143,8 @@ public class ComprasController implements Initializable{
         } catch (Exception e) {
             e.printStackTrace();
         }
+
+        mostrarTotalCompras.setText(String.valueOf(sumaCompras));
         return dataList;
     }
     private void MostrasrlistaCompras() {
@@ -112,6 +166,12 @@ public class ComprasController implements Initializable{
         String query = "";
 
         try {
+
+            // Obtener la fecha seleccionada del DatePicker
+            LocalDate fechaSeleccionada = fechaData.getValue();
+            LocalTime horaActual = LocalTime.now();
+            LocalDateTime fechaYHora = LocalDateTime.of(fechaSeleccionada, horaActual);
+
             conexion = DatabaseConnection.getConnection(); // Abre la conexión
             if (!fieldCantidad.getText().isEmpty() && !fieldMonto.getText().isEmpty() && listProveedores.getValue() != null && listNombreArticulos.getValue() != null) {
                 // Obtener el ID del proveedor correspondiente al nombre seleccionado
@@ -120,14 +180,37 @@ public class ComprasController implements Initializable{
                 preparedStatement.setString(1, listNombreArticulos.getValue().toString());
                 preparedStatement.setInt(2, Integer.parseInt(fieldCantidad.getText()));
                 preparedStatement.setDouble(3, Double.parseDouble(fieldMonto.getText()));
-                preparedStatement.setString(4, fechaData.getValue().toString());
+                preparedStatement.setTimestamp(4, java.sql.Timestamp.valueOf(fechaYHora));
                 preparedStatement.execute();
 
+                //Parte para obtener los datos del producto y poder ingresar el costo de compra al cual se compro
+                query = "SELECT * FROM tbl_productos WHERE nombreProducto = ?";
+                PreparedStatement obtenerDatosInventario = conexion.prepareStatement(query);
+                obtenerDatosInventario.setString(1, listNombreArticulos.getValue());
+
+                ResultSet resultado = obtenerDatosInventario.executeQuery();
+                double totalCosto = 0.0;
+                int cantidadActual = 0;
+
+                while (resultado.next())
+                {
+                    cantidadActual = resultado.getInt("cantidad");
+                    totalCosto = resultado.getDouble("totalCosto");
+                }
+
+                int nuevaCantidad = Integer.parseInt(fieldCantidad.getText()) +cantidadActual;
+                double nuevoPrecioCosto = (totalCosto + Double.parseDouble(fieldMonto.getText()))/nuevaCantidad;
+                double nuevoCostoTotal = totalCosto + Double.parseDouble(fieldMonto.getText());
+
+
+
                 // Actualizar la cantidad de productos en la tabla tbl_productos
-                query = "UPDATE `tbl_productos` SET `cantidad` = `cantidad` + ? WHERE `nombreProducto` = ?";
+                query = "UPDATE `tbl_productos` SET `cantidad` = ?, `precioCosto` = ?, `totalCosto` = ? WHERE `nombreProducto` = ?";
                 PreparedStatement updateStatement = conexion.prepareStatement(query);
-                updateStatement.setInt(1, Integer.parseInt(fieldCantidad.getText()));
-                updateStatement.setString(2, listNombreArticulos.getValue().toString());
+                updateStatement.setInt(1, nuevaCantidad);
+                updateStatement.setDouble(2, nuevoPrecioCosto);
+                updateStatement.setDouble(3, nuevoCostoTotal);
+                updateStatement.setString(4, listNombreArticulos.getValue());
                 updateStatement.executeUpdate();
 
                 MostrasrlistaCompras();

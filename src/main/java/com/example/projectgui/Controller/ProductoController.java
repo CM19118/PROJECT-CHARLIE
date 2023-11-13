@@ -59,7 +59,7 @@ public class ProductoController implements Initializable {
     public void aggProducto() {
         bandera = false;
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/projectgui/formProducto.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/projectgui/formInsertarProducto.fxml"));
             Parent parent = loader.load();
             ProductoController productoController = loader.getController(); // Obtener el controlador
             productoController.cargandoDatosComBox();
@@ -120,7 +120,7 @@ public class ProductoController implements Initializable {
         try {
             connect = DatabaseConnection.getConnection(); // Abre la conexión
 
-            if (!fieldCantidad.getText().isEmpty() && !fieldPrice.getText().isEmpty() && !fieldnameProduct.getText().isEmpty() && listProveedores.getValue() != null) {
+            if (!fieldnameProduct.getText().isEmpty() && listProveedores.getValue() != null) {
                 // Obtener el nombre del proveedor seleccionado desde el ComboBox
                 String nombreProveedorSeleccionado = listProveedores.getValue().toString();
 
@@ -135,21 +135,40 @@ public class ProductoController implements Initializable {
                             + "`cantidad`=?,"
                             + "`precio`=?,"
                             + "`idProveedor`= ? WHERE idProducto = '"+idProducto+"'";
+
+
+                    PreparedStatement preparedStatement = connect.prepareStatement(query);
+                    preparedStatement.setString(1, fieldnameProduct.getText());
+                    preparedStatement.setString(2, fieldCantidad.getText());
+                    preparedStatement.setString(3, fieldPrice.getText());
+
+                    // Aquí se obtiene el ID del proveedor seleccionado
+                    preparedStatement.setInt(4, idProveedorSeleccionado);
+                    preparedStatement.execute();
+
+
+
                 }else{
-                    query = "INSERT INTO `tbl_productos`(`nombreProducto`, `cantidad`, `precio`, `idProveedor`) VALUES (?,?,?,?)";
+                    query = "INSERT INTO `tbl_productos`(`nombreProducto`, `cantidad`, `precio`, `precioCosto`, `totalCosto`, `idProveedor`) VALUES (?,?,?,?,?,?)";
+                    int cantidadIsertar = 0;
+                    double precioInsertarVenta = 0.0;
+                    double precioCostoInsertar = 0.0;
+                    double totalCostoInsertar = 0.0;
+
+                    PreparedStatement preparedStatement = connect.prepareStatement(query);
+                    preparedStatement.setString(1, fieldnameProduct.getText());
+                    preparedStatement.setInt(2, cantidadIsertar);
+                    preparedStatement.setDouble(3, precioInsertarVenta);
+                    preparedStatement.setDouble(4, precioCostoInsertar);
+                    preparedStatement.setDouble(5, totalCostoInsertar);
+
+                    // Aquí se obtiene el ID del proveedor seleccionado
+                    preparedStatement.setInt(6, idProveedorSeleccionado);
+                    preparedStatement.execute();
                 }
 
-                PreparedStatement preparedStatement = connect.prepareStatement(query);
-                preparedStatement.setString(1, fieldnameProduct.getText());
-                preparedStatement.setString(2, fieldCantidad.getText());
-                preparedStatement.setString(3, fieldPrice.getText());
-
-                // Aquí se obtiene el ID del proveedor seleccionado
-                preparedStatement.setInt(4, idProveedorSeleccionado);
-                preparedStatement.execute();
                 // Limpia los campos después de la inserción
                 clear();
-
                 // Cierra la ventana de productos (si es necesario)
                 if (stage != null) {
                     stage.close();

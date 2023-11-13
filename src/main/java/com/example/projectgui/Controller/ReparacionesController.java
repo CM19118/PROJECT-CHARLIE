@@ -14,6 +14,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.HBox;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.util.Callback;
 
@@ -37,6 +38,12 @@ public class ReparacionesController {
     //Boton para abrir el form donde se registrará la reparacion
     @FXML
     public Button btnAgregarReparacion;
+    @FXML
+    public Button btnGuarTotalReparacionePendientes;
+
+    //Configurar el campo grafico
+    @FXML
+    public Text txtTotalReparacionesPendientes;
 
 
     //Configuracion de la tabla para mostrar los datos de las reparaciones
@@ -71,6 +78,8 @@ public class ReparacionesController {
     @FXML
     public TableColumn<Reparacion, Void> colAccionesImpri;
 
+    //Varible global para poder scar el total de las cuentas por cobrar
+    double sumaReparacionesPendientes = 0.0;
 
     public void initialize()
     {
@@ -410,9 +419,42 @@ public class ReparacionesController {
 
         cargarReparaciones();
 
+        btnGuarTotalReparacionePendientes.setOnAction(event -> guardarTotalRepacionesPendientes());
+
         btnAgregarReparacion.setOnAction(actionEvent -> agrgarReparacion());
 
     }//Fin de la funcion de inicializacion
+
+    private void guardarTotalRepacionesPendientes() {
+        conexion = DatabaseConnection.getConnection();
+        PreparedStatement preparedStatement;
+        try {
+            // Consulta SQL de inserción
+            String query = "INSERT INTO tbl_cuentascobrar (totalCuentaCobrar) VALUES (?)";
+            preparedStatement = conexion.prepareStatement(query);
+            preparedStatement.setDouble(1, sumaReparacionesPendientes);
+
+            int filasAfectadas = preparedStatement.executeUpdate();
+            if (filasAfectadas > 0)
+            {
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Informacion");
+                alert.setHeaderText("Se guardó con exito !!");
+                alert.showAndWait();
+            }
+            else {
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Informacion");
+                alert.setContentText("No se guardó !!");
+                alert.showAndWait();
+            }
+
+
+        }catch (SQLException e)
+        {
+            e.printStackTrace();
+        }
+    }
 
 
     private void cargarReparaciones() {
@@ -422,9 +464,9 @@ public class ReparacionesController {
         conexion = DatabaseConnection.getConnection();
 
         //consulta a la base de datos para traer la informacion
-        String consultaReparaciones = "SELECT r.idReparaciones AS IdReparacion, s.nombreServicio AS NombreServicio, r.precioUnit AS precioUnitario, r.fechaInicio AS FechaInicio,"+
-                "r.cliente AS Cliente, r.telefono AS Telefono, r.correo AS Correo, r.equipo AS Equipo, r.detalles AS Detalles, r.estado AS Estado, r.estadoPago AS EstadoPago,"+
-                "r.detalleCostAdicionales AS DetalleCostAdicionales, r.montoCostAdicionales AS MontoCostAdicionales "+
+        String consultaReparaciones = "SELECT r.idReparaciones AS IdReparacion, s.nombreServicio AS NombreServicio, r.precioUnit AS precioUnitario, r.fechaInicio AS FechaInicio," +
+                "r.cliente AS Cliente, r.telefono AS Telefono, r.correo AS Correo, r.equipo AS Equipo, r.detalles AS Detalles, r.estado AS Estado, r.estadoPago AS EstadoPago," +
+                "r.detalleCostAdicionales AS DetalleCostAdicionales, r.montoCostAdicionales AS MontoCostAdicionales " +
                 "FROM tbl_reparaciones r INNER JOIN tbl_servicios s ON r.idServicio = s.idServicio;";
 
         try {
@@ -433,8 +475,7 @@ public class ReparacionesController {
             resultado = estado.executeQuery(consultaReparaciones);
 
             //Se recorre el resultado si existen los datos
-            while (resultado.next())
-            {
+            while (resultado.next()) {
                 int idReparacion = resultado.getInt("IdReparacion");
                 String servicio = resultado.getString("NombreServicio");
                 double precioUnitario = resultado.getDouble("precioUnitario");
@@ -448,17 +489,22 @@ public class ReparacionesController {
                 String detalleCost = resultado.getString("DetalleCostAdicionales");
                 double montoCostA = resultado.getDouble("MontoCostAdicionales");
 
+                if (estado.equals("En_Curso")) {
+                    sumaReparacionesPendientes = sumaReparacionesPendientes + precioUnitario + montoCostA;
+                }
+
                 //Crear objeto para pasarlo a la tabla
-                Reparacion reparacion = new Reparacion(idReparacion,servicio,precioUnitario,fechaIncio,cliente,telefono,equipo,detalles,estado,estadoPago,detalleCost,montoCostA);
+                Reparacion reparacion = new Reparacion(idReparacion, servicio, precioUnitario, fechaIncio, cliente, telefono, equipo, detalles, estado, estadoPago, detalleCost, montoCostA);
                 listaReparaciones.add(reparacion);
 
             }
 
 
-        }catch (SQLException e)
-        {
+        } catch (SQLException e) {
             e.printStackTrace();
         }
+
+        txtTotalReparacionesPendientes.setText(String.valueOf(sumaReparacionesPendientes));
 
         ObservableList<Reparacion> listaObservableReparaciones = FXCollections.observableArrayList(listaReparaciones);
         tablaReparaciones.setItems(listaObservableReparaciones);
